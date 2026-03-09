@@ -1,0 +1,1 @@
+export {useGetNotes} from './useGetNotes.hook'
