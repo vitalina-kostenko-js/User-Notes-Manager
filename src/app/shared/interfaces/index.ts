@@ -1,0 +1,1 @@
+export type { NotesInterface } from './notes.interface'
