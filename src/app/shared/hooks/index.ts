@@ -1,1 +1,1 @@
-export {useGetNotes} from './useGetNotes.hook'
+export { useNotes as useGetNotes } from './useNotes.hook';
