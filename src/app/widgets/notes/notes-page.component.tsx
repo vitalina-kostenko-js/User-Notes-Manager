@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { addItem, AddNotes } from "@/app/widgets/notes";
+import { NoteCard } from "./elements";
+import { NotesInterface } from "@/app/shared/interfaces";
 
-type Note = {
-    id: number;
-    title: string;
-    body: string;
-};
+type Note = NotesInterface
 
 export const NotesPage = () => {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -18,6 +16,7 @@ export const NotesPage = () => {
         try {
             const created = await addItem({ title, body });
             const newNote: Note = {
+                userId: "",
                 id: created.id,
                 title: created.title,
                 body: created.body,
@@ -32,12 +31,9 @@ export const NotesPage = () => {
         <div className="p-4 space-y-4">
             <AddNotes addItem={handleAddNote} />
 
-            <div className="grid gap-2">
+            <div className="grid gap-3">
                 {notes.map((note) => (
-                    <div key={note.id} className="p-3 border rounded shadow-sm">
-                        <h3 className="font-bold">{note.title}</h3>
-                        <p className="text-sm text-gray-600">{note.body}</p>
-                    </div>
+                    <NoteCard key={note.id} note={note} />
                 ))}
             </div>
 

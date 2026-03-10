@@ -1,10 +1,10 @@
 "use client";
 
-import { useGetNotes } from "@/app/shared/hooks";
 import { NotesInterface } from "@/app/shared/interfaces";
+import { useNotes } from "../../shared/hooks";
 
 export const NotesList = () => {
-    const { data, isLoading, error } = useGetNotes();
+    const { data, isLoading, error } = useNotes();
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -13,9 +13,15 @@ export const NotesList = () => {
     const notes: NotesInterface[] = Array.isArray(data) ? data : [];
 
     return (
-        <ul>
+        <ul className="space-y-3">
             {notes.map((note: NotesInterface) => (
-                <li key={note.id}>{note.title}</li>
+                <li
+                    key={note.id}
+                    className="border rounded shadow-sm p-3 bg-white"
+                >
+                    <h3 className="font-bold mb-1">{note.title}</h3>
+                    <p className="text-sm text-gray-600">{note.body}</p>
+                </li>
             ))}
         </ul>
     );
