@@ -1,0 +1,63 @@
+**Report for 10/03/2026**
+
+**Architecture & structure**
+
+* Created architecture layers: `entities/api`, `entities/models`, `widgets/notes`, `shared/hooks`, `shared/interfaces`
+* Implemented **barrel files (`index.ts`)** in `entities/api`, `entities/models`, `widgets/notes/elements`, `shared/hooks`
+
+**Notes data & API**
+
+* Created `NotesInterface` (`userId`, `id`, `title`, `body`)
+* Implemented **API route `/api/notes`**
+
+  * `GET` → returns notes
+  * `POST` → creates a new note
+* Added service layer `entities/api/notes.api.ts`
+
+  * `getNotes`
+  * `createNoteApi`
+
+**Database layer (Supabase)**
+
+* Model functions in `entities/models/note.model.ts`
+
+  * `findNotes`
+  * `createNote`
+  * `updateNote`
+  * `deleteNote`
+* Configured Supabase client (`supabase.api.ts`)
+* Moved credentials to `.env.local`
+
+**React Query & hooks**
+
+* Created hook `useNotes` using **TanStack Query**
+* Fetches data from `/api/notes`
+* Typed response as `NotesInterface[]`
+* Exported via barrel file (`useGetNotes`)
+
+**Notes widgets & UI**
+
+* `NotesList` – renders notes fetched from API
+* `NoteCard` – reusable UI component for note display
+* `AddNotes` – form using **React Hook Form**
+* `addItem` service for `POST /api/notes`
+
+**Notes page**
+
+* `NotesPage` widget
+* Handles note creation and local state updates
+* Renders:
+
+  * Add note form
+  * List of notes (`NoteCard`)
+  * Empty state message
+
+**Infrastructure**
+
+* Added `QueryClientProvider` in `providers.tsx`
+* Integrated widgets into main route (`page.tsx`)
+
+**Git**
+
+* Structured commits (`feat`, `refactor`, `fix`, `chore`)
+* Pushed project to GitHub repository **User-Notes-Manager**
