@@ -12,7 +12,7 @@ export const findNotes = async (): Promise<NotesInterface[]> => {
 };
 
 export const deleteNote = async (id: number): Promise<void> => {
-  const { error } = await supabase.from("notes").delete().eq("id", id);
+  const { error } = await supabase.from("notes").delete().eq("id", Number(id));
 
   if (error) {
     throw error;

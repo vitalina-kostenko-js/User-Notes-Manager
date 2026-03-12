@@ -1,4 +1,5 @@
 export {NotesList} from './notes-list.component'
 export {AddNotes} from './add-notes.component'
-export {addItem} from './add-notes.service'
+export {addItem} from './notes.service'
 export {NotesPage} from './notes-page.component'
+export {deleteItem} from './notes.service'

@@ -2,8 +2,11 @@
 
 import { NotesInterface } from "@/app/shared/interfaces";
 import { useNotes } from "../../shared/hooks";
+import { NoteCard } from "./elements/note-card.component";
 
-export const NotesList = () => {
+export const NotesList = ({onDelete,}: {
+    onDelete?: (id: number) => void
+}) => {
     const { data, isLoading, error } = useNotes();
 
     if (isLoading) return <div>Loading...</div>;
@@ -13,15 +16,9 @@ export const NotesList = () => {
     const notes: NotesInterface[] = Array.isArray(data) ? data : [];
 
     return (
-        <ul className="space-y-3">
+        <ul className="p-4 space-y-4">
             {notes.map((note: NotesInterface) => (
-                <li
-                    key={note.id}
-                    className="border rounded shadow-sm p-3 bg-white"
-                >
-                    <h3 className="font-bold mb-1">{note.title}</h3>
-                    <p className="text-sm text-gray-600">{note.body}</p>
-                </li>
+                <NoteCard key={note.id} note={note} onDelete={onDelete ? () => onDelete(note.id) : undefined}/>
             ))}
         </ul>
     );
